@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Proyecto</title>
+    <link rel="stylesheet" href="estilo/index.css" />
+  </head>
+
+  <body>
+    <noscript class="noscript">
+      <h1>Esta página necesita JavaScript para funcionar correctamente</h1>
+    </noscript>
+    <header class="menu">
+      <input type="radio" name="section" id="principal" checked />
+      <label for="principal">Principal</label>
+
+      <input type="radio" name="section" id="inicio" />
+      <label for="inicio">Inicio</label>
+
+      <input type="radio" name="section" id="productos" />
+      <label for="productos">Productos</label>
+
+      <input type="radio" name="section" id="juegos" />
+      <label for="juegos">Juegos</label>
+    </header>
+
+    <section class="principal active">
+      <h1>Principal</h1>
+      <p>Contenido principal</p>
+    </section>
+    <section class="inicio">
+      <h1>Inicio</h1>
+      <form class="login active">
+        <div class="login-form">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required />
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" required />
+        </div>
+        <button type="submit" onclick="login()">Login</button>
+      </form>
+      <form action="" class="activo">
+        
+        <div class="registro-form">
+          <div class="input-radio">
+            <label for="" class="negrita">Género:</label>
+
+            <!-- Grupo Masculino -->
+            <div class="radio-group">
+              <label for="generoM">Masculino</label>
+              <input
+                type="radio"
+                id="generoM"
+                checked
+                name="genero"
+                value="Masculino"
+                required
+              />
+            </div>
+            <!-- Grupo Femenino -->
+            <div class="radio-group">
+              <label for="generoF">Femenino</label>
+              <input
+                type="radio"
+                id="generoF"
+                name="genero"
+                value="Femenino"
+                required
+              />
+            </div>
+          </div>
+
+          <!-- Aficiones -->
+          <label for="" class="negrita">Aficiones:</label>
+
+          <div class="checkbox-group">
+          <label for="deporte">Deporte </label>
+          <input type="checkbox" name="aficiones" value="deporte" id="deporte" />
+         
+          <label for="musica">Música </label>
+          <input type="checkbox" name="aficiones" value="musica" id="musica" />
+          
+          <label for="lectura">Lectura </label>
+          <input type="checkbox" name="aficiones" value="lectura" id="lectura" />
+          
+          <label for="cine">Cine </label>
+          <input type="checkbox" name="aficiones" value="cine" id="cine" />
+          
+          <label for="viajar">Viajar </label>
+          <input type="checkbox" name="aficiones" value="viajar" id="viajar" />
+          
+          <label for="cocina">Cocina </label>
+          <input type="checkbox" name="aficiones" value="cocina" id="cocina" />
+        </div>
+
+
+        <!-- Domicilio -->
+        <label for="domicilio">Tipo de Domicilio:</label>
+  <select name="domicilio" id="domicilio" required>
+    <option value="" disabled selected>Seleccione una opción</option>
+    <option value="casa">Casa</option>
+    <option value="piso">Piso</option>
+    <option value="apartamento">Apartamento</option>
+    <option value="otro">Otro</option>
+  </select>
+
+        <!-- Direccion -->
+          <label for="direccion">Dirección</label>
+          <input type="text" id="direccion" name="direccion" required />
+
+          <!-- Patrón de DNI: 8 números y una letra en mayúsculas -->
+          <label for="dni">DNI</label>
+          <input
+            type="text"
+            id="dni"
+            name="dni"
+            required
+            maxlength="9"
+            pattern="[0-9]{8}[A-Z]"
+            title="El DNI debe tener 8 números y una letra en mayúsculas (11111111H)"
+          />
+
+          <!-- Nombre se valida con un máximo de 20 caracteres y la primera letra en mayuscula -->
+          <label for="nombre">Nombre</label>
+          <input
+            type="text"
+            id="nombre"
+            name="nombre"
+            required
+            maxlength="20"
+            pattern="[A-Z][a-zA-Z]*"
+            title="El nombre debe comenzar con una letra mayuscula"
+          />
+
+          <label for="apellido">Apellidos</label>
+          <input
+            type="text"
+            id="apellido"
+            name="apellido"
+            required
+            required
+            maxlength="20"
+            pattern="[A-Z][a-zA-Z]*"
+            title="El apellido debe comenzar con una letra mayuscula"
+          />
+
+          <!-- Tiene que ser una fecha anterior a la del día de hoy -->
+          <label for="nacimiento">Fecha de nacimiento</label>
+          <input
+            type="date"
+            id="nacimiento"
+            name="nacimiento"
+            required
+            min="1900-01-01"
+            max="2024-11-25"
+          />
+
+          <!-- Debe tener 9 caracteres obligatoriamente y empezar por 6 7 8 o 9 -->
+          <label for="telefono">Telefono</label>
+          <input
+            type="tel"
+            id="telefono"
+            name="telefono"
+            required
+            pattern="[6-9][0-9]{8}"
+            title="El telefono debe tener 9 caracteres y empezar por 6 7 8 o 9"
+          />
+
+          <label for="emailRegistro">Email</label>
+          <input
+            type="email"
+            id="emailRegistro"
+            name="emailRegistro"
+            required
+          />
+
+          <!-- Contraseña -->
+          <label for="passwordRegistro">Contraseña</label>
+          <input
+            type="password"
+            id="passwordRegistro"
+            name="passwordRegistro"
+            required
+            minlength="8"
+            pattern="[A-Z0-9!@#$%^&*()_+~`|{}:\ >?/.,;'-]+"
+            title="La contraseña debe contener al menos 8 caracteres, y debe tener mayusculas, numeros, simbolos"
+          />
+
+          <!-- Confirmar Contraseña -->
+          <label for="passwordRegistroConfirmar">Confirmar Contraseña</label>
+          <input
+            type="password"
+            id="passwordRegistroConfirmar"
+            name="passwordRegistroConfirmar"
+            required
+            minlength="8"
+            pattern="[A-Z0-9!@#$%^&*()_+~`|{}:\ >?/.,;'-]+"
+            title="La contraseña debe contener al menos 8 caracteres, y debe tener mayusculas, numeros, simbolos"
+          />
+
+          <span id="errorMensaje" style="color: red; display: none"
+            >Las contraseñas no coinciden</span
+          >
+         
+
+          
+        </div>
+        <div class="mostrarModal">
+          <label>
+            <input type="checkbox" id="aceptoTerminos" name="aceptoTerminos" required>
+            <label id="terminosEnlace" class="terminos" onclick="openModal()">Leer los términos y condiciones</label>
+          </label>
+        </div>
+       
+        
+       
+        <button class="btn-registrate"  type="submit" id="botonRegistrate">Registrate</button>
+        <button class="btn-registrar"  type="submit" id="botonRegistrar"  onclick="registroFormulario()">Registrarse</button>
+        
+        <!-- Botón para abrir la ventana modal -->
+      
+      </form>
+    
+  
+          <!-- Estructura de la ventana modal -->
+          <div id="modalOverlay" class="modal-overlay">
+            <div class="modal">
+              <p>¿Acepta terminos y condiciones?</p>
+              <button class="close-btn separado" onclick="aceptarTerminos()">Aceptar</button>
+              <button class="close-btn separado" onclick="rechazarTerminos()">Rechazar</button>
+            </div>
+          </div>
+    
+      <section class="validado" id="validado"></section>
+    </section>
+    <section class="productos">
+      <h1>Productos</h1>
+      <p>Contenido productos</p>
+    </section>
+    <section class="juegos">
+      <h1>Juegos</h1>
+      <p>Contenido juegos</p>
+    </section>
+
+    
+
+    <footer>
+      <p>Aquí irá el footer</p>
+      <p>Trabajo realizado por Juan Antonio Martín Panchón 2ºDAW</p>
+    </footer>
+    <script src="js/Opciones.js"></script>
+    <script src="js/validacion.js"></script>
+  </body>
+</html>

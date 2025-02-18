@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+
+<html lang="es">
+        <head>
+            
+           
+        </head>
+
+
+        <body>
+
+            <script>
+                //Crear una cookie
+                /*Vamos a crear una cookie simple en la cual no vamos a especificarlos parámetros de fecha de expiración, path,
+                 dominio, secure etc */
+                document.cookie="usuario=Juan;";
+            
+                 //Leer una cookie
+                 alert(document.cookie);
+
+                 /*¿Qué ocurre si creamos otra cookie y la leemos?
+                 por ejemplo: */
+                 document.cookie="usuario=Juan;";
+                 document.cookie="edad=30;";
+
+                 /*En primer lugar la cookie con nombre usuario (al ya existir) es reemplazada en este caso por la misma. 
+                 Al hacer el alert(document.cookie) se nos va a mostrar las dos cookies seguidas como si fuera una cadena 
+                 aunque realmente no se va a tratar como una cadena */
+                 alert(document.cookie);
+
+                 //Modificar una cookie
+                 document.cookie="edad=31;";
+                 //Muestro la cookie
+                 alert(document.cookie);  
+
+                 /*Debemos tener cuidado a la hora de modificar una cookie  porque la 
+                 modificación debe hacerse exactamente con los mismos parámetros que 
+                 tenga la cookie, es decir, si la cookie con el parámetro edad, tuviera
+                  tambieén el parámetro expires también tendriamos que haberlo puesto en
+                   la modificación, sino la interpreta como una cookie distinta */
+
+                 /*Borrar una cookie
+                 Tengo que poner una fecha de expiración anterior a 
+                 la fecha en la que nos encontramos
+                 */
+                  document.cookie="usuario=;expires=Thu, 01 Jan 1970 00:00:01 GMT";
+                  document.cookie="edad=;expires=Thu, 01 Jan 1970 00:00:01 GMT";
+                  alert(document.cookie); 
+
+                
+
+            </script>
+
+        </body>
+
+      
+</html>

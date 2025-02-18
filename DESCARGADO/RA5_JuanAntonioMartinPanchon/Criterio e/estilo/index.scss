@@ -1,0 +1,289 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  min-height: 100dvh;
+}
+
+.menu {
+  background-color: #333333;
+  color: #fff;
+  padding: 30px;
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.menu label {
+  cursor: pointer;
+}
+
+.menu input[type=radio] {
+  display: none;
+}
+
+section {
+  display: none;
+  width: 100%;
+  margin: 20px;
+  text-align: center;
+}
+
+section.active {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.registro-form {
+  display: none;
+  width: 100%;
+  margin: 20px;
+  text-align: center;
+  gap: 12px;
+}
+
+.registro-form .negrita {
+  font-weight: bold;
+}
+
+.registro-form.activo {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.registro-form label {
+  margin-left: 30px;
+  display: flex;
+}
+
+.registro-form input {
+  margin-left: 30px;
+  display: flex;
+  text-align: left;
+  width: 300px;
+  border: 1px solid #333;
+}
+
+.registro-form select {
+  width: 300px;
+  padding: 10px;
+  margin-left: 30px;
+  border: 1px solid #333;
+}
+
+.registro-form .input-radio {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.registro-form .radio-group {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.registro-form .radio-group label {
+  margin-right: 5px;
+}
+
+.registro-form .checkbox-group {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  align-items: start;
+}
+
+.registro-form .checkbox-group label {
+  display: flex;
+  align-items: center;
+  margin-right: 5px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+form .login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+form .login-form input {
+  width: 350px;
+}
+
+label {
+  margin-bottom: 10px;
+}
+
+section input {
+  padding: 10px;
+  margin-bottom: 20px;
+  border: none;
+  border-bottom: 2px solid #333;
+  outline: none;
+  width: 80%;
+}
+
+button {
+  width: auto;
+  padding: 10px 20px;
+  background-color: rgb(61, 128, 61);
+  border-radius: 10px;
+  color: #fff;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  margin-bottom: 15px;
+}
+
+footer {
+  background-color: #333333;
+  color: #fff;
+  padding: 30px;
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  margin-top: auto;
+}
+
+.btn-registrar {
+  display: none;
+}
+
+
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: none;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.close {
+  float: right;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.mostrarModal {
+  display: none;
+}
+
+.ventana-emergente {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.ventana-emergente.active {
+  display: flex;
+}
+
+/*# sourceMappingURL=index.css.map */
+ /* Estilos para el fondo de la ventana modal */
+ .modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro semi-transparente */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  display: none; /* Oculto por defecto */
+}
+
+/* Estilos para la ventana modal */
+.modal {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 400px;
+  width: 80%;
+  height: auto;
+  display: flex !important;
+  text-align: center;
+  position: relative !important;
+}
+
+/* Estilo para el botón de cerrar */
+.close-btn {
+  margin-top: 15px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.close-btn:hover {
+  background-color: #0056b3;
+}
+
+//clase separado para el boton de aceptar y rechazar
+.separado{
+  margin-left: 10px;
+}
+
+//Clase terminos para el texto de los terminos y condiciones
+.terminos{
+  margin-top: 10px;
+  text-align: center;
+  color: blue;
+  display: block;
+}
+
+.terminos:hover{
+  cursor:pointer;
+}
+
+//clase para cuando se active el noscript
+.noscript{
+  color: red;
+  font-size: large;
+}
+
+//Clase rojo para cuando no esté correcto el campo
+.rojo{
+  border-color: red!important;
+}
+
+//Clase verde para cuando el campo sea correcto
+.verde{
+  border-color: green!important;
+}

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+      <head>
+          
+           <meta charset="UTF-8">
+           <title>WebStorage</title>
+        
+      </head>
+   
+       <body>
+           <!--WEB STORAGE
+           - Permite almacenar datos localmente en el navegador del usuario.
+           - Es más seguro y almacena más información que las cookies
+           - El web storage se almacena por origen (dominio y protocolo) es decir todas las páginas del mismo
+           origen pueden acceder a los mismos datos. 
+            
+            WEB STORAGE en realidad no existe , es decir, se compone de dos elementos que son con los que 
+            vamos a trabajar:sessionStorage y sesionStorage
+            -->
+       </body>
+       
+       <script>
+        /*Comprobación de que el navegador soporta webStorage */
+
+
+         if (typeof(Storage)!= "undefined"){
+            
+                alert("El navegador soporta webStorage");
+
+                //window.sessionStorage
+                //almacena datos sin fecha de expiración, es decir, los datos permanecen incluso si cerramos el navegador. 
+
+                //Crear un elemento (siempre son cadenas) opción 1 recomendada
+                sessionStorage.setItem("nombre","David");
+                //También podría hacerse así (pero no se recomienda porque algunos navegadores
+                //podrían dejar de admitirlo) opción 2 no recomendada pero funciona
+                sessionStorage.apellido="Vázquez";
+
+
+                //Consultar un elemento opción 1 recomendada
+                alert(sessionStorage.getItem("nombre"));
+                //Consultar un elemento opción 2 no recomendada pero funciona
+                alert(sessionStorage.apellido);
+
+                //Borrar un elemento (por ejemplo el apellido)
+               //  sessionStorage.removeItem("apellido");
+                
+                //Voy a mostrar lo siguiente
+               // alert(sessionStorage.getItem("nombre")+" "+sessionStorage.getItem("apellido"));
+            
+                //Borrar todos los elementos
+                // sessionStorage.clear();
+                 alert(sessionStorage.getItem("nombre")+" "+sessionStorage.getItem("apellido"));
+
+                
+
+
+
+             }
+             
+             else
+             {
+             
+                alert("El navegador soporta wevStorage");
+             }
+
+            
+
+
+
+            /*window.sessionStorage
+            almacena los datos durante una sesión de modo que si se cierra la ventana
+            o el navegador, los datos desaparecen. Podríamos realizar exactamente el mismo*/
+
+
+       </script>
+
+
+
+
+</html>

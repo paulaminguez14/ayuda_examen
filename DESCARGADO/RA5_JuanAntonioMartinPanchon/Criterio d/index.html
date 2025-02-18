@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movimiento del Cuadrado</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center; /* Centra el contenido horizontalmente */
+      margin: 0;
+      background-color: #f0f0f0;
+    }
+    #menu {
+      margin-top: 20px; /* Espacio desde el margen superior */
+      margin-bottom: 20px;
+    }
+    canvas {
+      border: 2px solid #000;
+      margin-top: 20px; /* Ajustar distancia desde el menú */
+    }
+    #commentList {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Menú con botones -->
+  <div id="menu">
+    <button id="inicio">Iniciar Juego</button>
+    <button id="pausa">Pausar Juego</button>
+  </div>
+
+  <!-- Canvas para el juego -->
+  <canvas id="gameCanvas" width="1200" height="500"></canvas>
+  <p id="contenido">Tiempo</p>
+  <h2>Comentarios</h2>
+    <ul id="commentList"></ul>
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CriterioA</title>
+</head>
+<body>
+    <h1>Ejercicios del Criterio A</h1>
+    <h2>DATE</h2>
+    <h3>Calcular tú fecha nacimiento</h3>
+    <input type="date" name="fecha" id="fechaNacimiento">
+    <button onclick="calcularEdad(document.getElementById('fechaNacimiento').value)">Calcular Edad</button>
+    <p id="resultadoEdad"></p>
+
+    <h3>Diferencia entre dos fechas en dias</h3>
+    <input type="date" name="fecha" id="fecha1">
+    <input type="date" name="fecha" id="fecha2">
+    <button onclick="calcularDias(document.getElementById('fecha1').value, document.getElementById('fecha2').value)">Calcular Edad</button>
+    <p id="diferencia"></p>
+
+    <h2>Math</h2>
+    <h3>Distintos tipos de redondeos</h3>
+    <label for="numeroRedondeo">Introduzca el numero a redondear</label>
+    <input type="number" id="numeroRedondeo">
+    <br>
+    <p>Seleccione el tipo de redondeo</p>
+    <input type="radio" id="round" name="redondeo" value="round">
+    <label for="round">round</label><br>
+    <input type="radio" id="floor" name="redondeo" value="floor">
+    <label for="floor">floor</label><br>
+    <input type="radio" id="ceil" name="redondeo" value="ceil">
+    <label for="ceil">ceil</label><br>
+    <input type="radio" id="trunc" name="redondeo" value="trunc">
+    <label for="trunc">trunc</label><br><br>
+    <button onclick="redondear(document.getElementById('numeroRedondeo').value, document.getElementsByName('redondeo').value)">Redondear</button>
+    <p id="resultadoRedondeo"></p>
+
+    <h2>Number</h2>
+    <h3>Convertir cadena a número</h3>
+    <input type="text" id="cadena">
+    <button onclick="convertirStringEnNumero(document.getElementById('cadena').value)">Convertir</button>
+    <p id="resultado"></p>
+
+
+    <h2>String</h2>
+    <h3>Procesar Texto</h3>
+    <input type="text" id="procesadoTexto">
+    <button onclick="procesarTexto(document.getElementById('procesadoTexto').value)">Convertir</button>
+    <p id="minusculas"></p>
+    <p id="quitarEspacios"></p>
+    <p id="cambiarLetra"></p>
+    <p id="primerosCaracteres"></p>
+    <p id="posicionA"></p>
+    <p id="dividirCadena"></p>
+
+    <h2>Error</h2>
+    <h3>Manejo de TypeError y ReferenceError</h3>
+    <button onclick="ejecutar()">Ejecutar</button>
+    <p id="ReferenceError"></p>
+    <p id="TypeError"></p>
+    <p id="error"></p>
+
+    <h2>Error RangeError</h2>
+    <h3>Manejo de RangeError</h3>
+    <input type="number" id="numeroRaiz">
+    <button onclick="calcularRaizCuadrada(document.getElementById('numeroRaiz').value)">Calcular</button>
+    <p id="resultadoRaiz"></p>
+
+
+
+
+    
+
+    <script src="CriterioA.js"></script>
+</body>
+</html>

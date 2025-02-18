@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prueba de Selección DOM</title>
+    <style>
+        /* Estilos CSS para los selectores */
+        .contenedor {
+            border: 1px solid #333;
+            padding: 10px;
+            margin: 10px;
+            background-color: #f4f4f4;
+        }
+
+        .contenedor .tarjeta {
+            border: 1px solid #666;
+            padding: 10px;
+            margin: 5px;
+            background-color: #e8e8e8;
+        }
+
+        /* Selectores combinados */
+        .contenedor .tarjeta.primera {
+            background-color: #d1ecf1;
+            color: #0c5460;
+        }
+
+        /* Pseudoclase */
+        a:hover {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+    <header id="header">
+        <h1>Prueba de Selección de Elementos DOM</h1>
+        <p>Este es un ejemplo de página HTML para probar diferentes métodos de selección.</p>
+    </header>
+
+    <!-- Elemento <form> -->
+    <form name="miFormulario" id="formulario-principal">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre">
+        <button type="submit">Enviar</button>
+    </form>
+
+    <!-- Contenedor de contenido 1  -->
+    <section class="contenedor" id="contenedor-principal">
+        <div class="tarjeta primera" id="tarjeta-1">
+            <h2>Tarjeta 1</h2>
+            <p>Contenido de la tarjeta 1.</p>
+            <a href="#!" name="enlace1">Enlace 1</a>
+        </div>
+        <div class="tarjeta" id="tarjeta-2">
+            <h2>Tarjeta 2</h2>
+            <p>Contenido de la tarjeta 2.</p>
+            <a href="#!" name="enlace2">Enlace 2</a>
+        </div>
+        <div class="tarjeta" id="tarjeta-3">
+            <h2>Tarjeta 3</h2>
+            <p>Contenido de la tarjeta 3.</p>
+            <a href="#!" name="enlace3">Enlace 3</a>
+        </div>
+    </section>
+
+     <!-- Contenedor de contenido 2 -->
+     <section class="contenedor" id="contenedor-principal">
+        <div class="tarjeta primera" id="tarjeta-4">
+            <h2>Tarjeta 4</h2>
+            <p>Contenido de la tarjeta 4.</p>
+            <a href="#!" name="enlace4">Enlace 4</a>
+        </div>
+        <div class="tarjeta" id="tarjeta-5">
+            <h2>Tarjeta 5</h2>
+            <p>Contenido de la tarjeta 5.</p>
+            <a href="#!" name="enlace5">Enlace 5</a>
+        </div>
+        <div class="tarjeta" id="tarjeta-6">
+            <h2>Tarjeta 6</h2>
+            <p>Contenido de la tarjeta 6.</p>
+            <a href="#!" name="enlace6">Enlace 6</a>
+        </div>
+    </section>
+
+    <!-- Imágenes -->
+    <div id="galeria-imagenes">
+        <img src="https://via.placeholder.com/150" alt="Imagen 1">
+        <img src="https://via.placeholder.com/150" alt="Imagen 2" class="mi-clase">
+        <img src="https://via.placeholder.com/150" alt="Imagen 3" class="mi-clase">
+    </div>
+
+    <!-- Scripts para probar los métodos de selección -->
+    <script>
+        // Seleccionar elementos con distintos métodos
+        /* Seleccionar un elemento cuyo ID es header
+        const header =   COMPLETAR               
+       console.log("Elemento con ID 'header':", header);
+         */
+
+        const header = document.getElementById("header");
+        console.log("Elemento con ID 'header':", header);
+        
+        /* Seleccionar los elementos que tengan la etiqueta div
+        const divs =  COMPLETAR
+        console.log("Elementos <div> en el documento:", divs);
+        */
+       
+        const divs = document.getElementsByTagName("div");
+        console.log("Elementos <div> en el documento:", divs);
+
+        /* Seleccionar los elementos que tengan la clase tarjeta
+        const tarjetas = COMPLETAR
+        console.log("Elementos con clase 'tarjeta':", tarjetas);
+        */
+
+        const tarjetas = document.getElementsByClassName("tarjeta");
+        console.log("Elementos con clase 'tarjeta':", tarjetas);
+
+        /*Seleccionar primer elemento del selector contenedor tarjeta primera
+        const primeraTarjeta = COMPLETAR
+        console.log("Primer elemento con clase 'contenedor .tarjeta.primera':", primeraTarjeta);
+        */
+
+        const primeraTarjeta = document.querySelector(".contenedor .tarjeta.primera")
+        console.log("Primer elemento con clase 'contenedor .tarjeta.primera':", primeraTarjeta);
+
+        /* Seleccionar todos los elementos del selector contenedor tarjeta primera
+        const todasLasTarjetas = COMPLETAR
+        console.log("Todos los elementos con clase 'contenedor .tarjeta':", todasLasTarjetas);
+         */
+
+         const todasLasTarjetas = document.querySelectorAll(".contenedor .tarjeta");
+         console.log("Todos los elementos con clase 'contenedor .tarjeta':", todasLasTarjetas);
+
+
+
+
+
+        /* Acceder a todos los formularios en el documento
+        const formularios = COMPLETAR;
+        console.log("Todos los formularios en el documento:", formularios);
+        */
+
+
+        const formularios = document.getElementsByTagName("form");
+        console.log("Todos los formularios en el documento:", formularios);
+
+
+        /*Acceder a todas las imágenes
+        const imagenes = COMPLETAR
+        console.log("Todas las imágenes en el documento:", imagenes);
+        */
+
+        const imagenes = document.getElementsByTagName("img");
+        console.log("Todas las imágenes en el documento:", imagenes);
+
+        /* Acceder a todos los enlaces
+        const enlaces = COMPLETAR
+        console.log("Todos los enlaces en el documento:", enlaces);
+        */  
+
+        const enlaces = document.getElementsByTagName("a");
+        console.log("Todos los enlaces en el documento:", enlaces);
+
+        /* Acceder a las anclas (elementos <a> con atributo name)
+        const anclas =  COMPLETAR
+        console.log("Todas las anclas (elementos <a> con name):", anclas);
+        */
+
+
+        const anclas =  document.querySelectorAll('a[name]');
+        console.log("Todas las anclas (elementos <a> con name):", anclas);
+
+        /*Seleccionar el elemento body
+        const body = COMPLETAR
+        console.log("Elemento <body>:", body);
+        */
+
+
+        const body = document.querySelector('body');
+        console.log("Elemento <body>:", body);
+
+        /*Seleccionar el elemento raíz (html)
+        const raiz = COMPLETAR
+        console.log("Elemento raíz (html):", raiz);
+        */
+
+        const raiz = document.documentElement;
+        console.log("Elemento raíz (html):", raiz);
+
+    </script>
+</body>
+</html>

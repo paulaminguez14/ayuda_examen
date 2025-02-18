@@ -1,0 +1,55 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+table{
+    border: 1px solid black;
+    font-size: larger;
+    text-align: center;
+}/* Reset de márgenes y padding */
+* {
+    padding: 0;
+    margin: 0;
+}
+
+/* Asegurar que html y body ocupen el 100% de la altura */
+html, body {
+    height: 100%;
+}
+
+h1 {
+    margin-bottom: 30px;
+}
+
+/* Estilo del cuerpo con fondo de gradiente */
+body {
+    background: linear-gradient(to bottom, 
+    red 0%, red 25%, 
+    yellow 25%, yellow 75%, 
+    red 75%, red 100%);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed; 
+    
+    /* Flexbox para centrar elementos */
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+    flex-direction: column;
+}
+
+/* Estilos para la tabla */
+table {
+    border-collapse: collapse; /* Elimina el espacio entre las celdas */
+    width: auto; /* Ajusta automáticamente al contenido */
+    margin: 0 auto; /* Centra horizontalmente (si no usas flexbox) */
+}
+
+/* Bordes para las celdas */
+td {
+    border: 1px solid black;
+    padding: 10px; /* Añadir espacio dentro de las celdas */
+    text-align: center; /* Centra el texto dentro de las celdas */
+}

@@ -1,0 +1,134 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    min-height: 100dvh;
+  }
+  
+  .menu {
+    background-color: #333333;
+    color: #fff;
+    padding: 30px;
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+  
+    label {
+      cursor: pointer;
+    }
+  
+    input[type="radio"] {
+      display: none;
+    }
+  }
+  
+  section {
+    display: none;
+    width: 100%;
+    margin: 20px;
+    text-align: center;
+  
+    &.active {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+  }
+  
+  .registro-form {
+    display: none;
+    width: 100%;
+    margin: 20px;
+    text-align: center;
+    &.activo {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      label{
+        margin-left: 30px;
+        display: flex;
+      }
+      input{
+        margin-left: 30px;
+        display: flex;
+        text-align: left;
+        width: 300px;
+        border: 1px solid #333;
+      }
+      .input-radio {
+        display: flex;
+        flex-direction: column; /* Apila los grupos de radio button verticalmente */
+        align-items: flex-start; /* Alinea los grupos de radio buttons hacia la izquierda */
+    }
+    
+    .radio-group {
+        display: flex; /* Alinea los label e input horizontalmente */
+        justify-content: space-around ;
+        align-items: center; /* Centra verticalmente el label y el input */
+        margin-bottom: 25px; /* Espacio entre los grupos */
+    }
+    
+    .radio-group label {
+        margin-right: 5px; /* Espacio entre el label y el input, puedes ajustar según necesidad */
+    }
+        
+    
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  
+    .login-form {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+  
+      input {
+        width: 350px;
+      }
+    }
+  }
+  
+  label {
+    margin-bottom: 10px;
+  }
+  
+  section input {
+    padding: 10px;
+    margin-bottom: 20px;
+    border: none;
+    border-bottom: 2px solid #333;
+    outline: none;
+    width: 80%;
+  }
+  
+  button {
+    width: auto;
+    padding: 10px 20px;
+    background-color: rgb(61, 128, 61);
+    border-radius: 10px;
+    color: #fff;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    margin-bottom: 15px;
+  }
+
+  footer{
+    background-color:  #333333;
+    color: #fff;
+    padding: 30px;
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    margin-top: auto  ;
+  }
+  

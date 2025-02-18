@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ventana Modal</title>
+<style>
+  /* Estilos para el fondo de la ventana modal */
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro semi-transparente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    display: none; /* Oculto por defecto */
+  }
+
+  /* Estilos para la ventana modal */
+  .modal {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 400px;
+    width: 80%;
+    text-align: center;
+  }
+
+  /* Estilo para el botón de cerrar */
+  .close-btn {
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .close-btn:hover {
+    background-color: #0056b3;
+  }
+
+</style>
+</head>
+<body>
+
+<!-- Botón para abrir la ventana modal -->
+<button onclick="openModal()">Abrir Modal</button>
+
+<!-- Estructura de la ventana modal -->
+<div id="modalOverlay" class="modal-overlay">
+  <div class="modal">
+    <p>Este es el contenido de la ventana modal. Solo se puede cerrar desde el botón.</p>
+    <button class="close-btn" onclick="closeModal()">Cerrar</button>
+  </div>
+</div>
+
+<script>
+  // Función para abrir la ventana modal
+  function openModal() {
+    document.getElementById("modalOverlay").style.display = "flex";
+  }
+
+  // Función para cerrar la ventana modal
+  function closeModal() {
+    document.getElementById("modalOverlay").style.display = "none";
+  }
+
+  // Deshabilitar el cierre de la modal al hacer clic fuera de ella
+  document.getElementById("modalOverlay").addEventListener("click", function(event) {
+    if (event.target === document.getElementById("modalOverlay")) {
+      event.stopPropagation();
+    }
+  });
+
+  /*
+event.target es el elemento en el que realmente se hizo clic.
+document.getElementById("modalOverlay") es la referencia al fondo de la ventana modal.
+Así que, si event.target === document.getElementById("modalOverlay") es true, significa que el clic ocurrió en el fondo oscuro y no en el contenido de la ventana modal.
+
+stopPropagation() evita que el evento de clic continúe hacia otros elementos.
+
+Aquí, event.stopPropagation() bloquea que el clic en el fondo modal active alguna acción, como cerrar el modal accidentalmente.
+De esta forma, el usuario solo podrá cerrar la ventana modal haciendo clic en el botón Cerrar dentro de ella, sin riesgo de cerrarla por error al hacer clic en el fondo.
+
+  */
+</script>
+
+</body>
+</html>
