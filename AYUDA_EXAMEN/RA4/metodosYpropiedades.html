@@ -1,0 +1,23 @@
+<!-- g) Se han creado métodos y propiedades. -->
+<!DOCTYPE html>
+<html lang="es-ES">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Métodos y propiedades</title>
+</head>
+<body>
+    <button id="myButton">Click me</button>
+
+    <script>
+        // Get the button element using its id
+        const button = document.getElementById('myButton');
+
+        // Add a click event listener to the button
+        button.addEventListener('click', () => {
+            // Change the button's text when clicked
+            button.textContent = 'Clicked!';
+        });
+    </script>
+</body>
+</html>

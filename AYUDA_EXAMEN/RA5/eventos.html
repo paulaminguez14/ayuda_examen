@@ -1,0 +1,31 @@
+<!-- c) Se han diferenciado los tipos de eventos que se pueden manejar. -->
+<!DOCTYPE html>
+<html lang="es-ES">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eventos</title>
+</head>
+<body>
+    <div id="event-list"></div>
+
+    <script>
+        // Get the reference to the event list element
+        const eventList = document.getElementById('event-list');
+
+        // Function to display the event type
+        function displayEventType(eventType) {
+            const eventTypeElement = document.createElement('p');
+            eventTypeElement.textContent = eventType;
+            eventList.appendChild(eventTypeElement);
+        }
+
+        // Add event listeners for all event types
+        for (const eventType in window) {
+            if (eventType.startsWith('on')) {
+                displayEventType(eventType);
+            }
+        }
+    </script>
+</body>
+</html>

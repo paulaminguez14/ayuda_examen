@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!--  f) Se han validado formularios Web utilizando eventos. -->
+    <form id="form">
+        <input type="text" id="name" placeholder="Name">
+        <input type="email" id="email" placeholder="Email">
+        <input type="password" id="password" placeholder="Password">
+        <button type="submit">Submit</button>
+    </form>
+    <script>
+        // Get form element
+        const form = document.getElementById('form');
+
+        // Add event listener for form submission
+        form.addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form submission
+
+            // Get input values
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            // Perform form validation
+            if (name === '' || email === '' || password === '') {
+                alert('Please fill in all fields');
+            } else {
+                // Form is valid, submit it
+                form.submit();
+            }
+        });
+    </script>
+</body>
+</html>

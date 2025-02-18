@@ -1,0 +1,34 @@
+<!-- c) Se han reconocido las características del lenguaje relativas a la creación y uso de arrays. -->
+<!DOCTYPE html>
+<html lang="es-ES">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arrays</title>
+</head>
+<body>
+    <script>
+        // Ejercicio de prueba con arrays en JavaScript
+        // Crear un array con nombres de frutas
+        var frutas = ["manzana", "banana", "naranja", "pera", "uva"];
+
+        // Acceder al primer elemento del array
+        var primerFruta = frutas[0];
+
+        // Acceder al último elemento del array
+        var ultimaFruta = frutas[frutas.length - 1];
+
+        // Agregar un nuevo elemento al final del array
+        frutas.push("sandía");
+
+        // Eliminar el último elemento del array
+        frutas.pop();
+
+        // Obtener la posición de un elemento en el array
+        var posicionNaranja = frutas.indexOf("naranja");
+
+        // Mostrar el array completo en el HTML
+        document.write(frutas);
+    </script>
+</body>
+</html>
