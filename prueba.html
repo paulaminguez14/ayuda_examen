@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="es-ES">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prueba</title>
+</head>
+<body>
+    <script>
+        /*
+          Se va a preguntar al usuario por el número de filas y columnas que
+          se quiere que tenga el tablero de la sopa de letras. Un máximo de 15.
+          Hay que controlar que lo que se introduzca sea un número y esté en ese
+          rango. En caso contrario se vuelve a pedir el número de fila o columna
+          hasta que el usuario lo introduzca correctamente
+        */
+
+        //Pedimos al usuario el tamaño que tendrá la sopa de letra.
+        var filas, columnas;
+
+        //variable booleana y operador de asignacion
+        var numeroCorrectoFilas = false;
+        var numeroCorrectoColumnas = false;
+
+        //variable undefined
+        var tablero;
+
+        //Pedimos columnas y filas.
+        do {
+            //Inicializamos una variable con var
+            //variable tipo numérica
+            filas = parseInt(prompt("Introduce el número de filas (máximo 15):"));
+
+            /* Utilizamos operadores lógicos AND(&&), NOT(!).
+             * Operadores de comparacion Mayor o iugla >=  y menor o igual <=
+             * Desigualdad estricta !==
+            */
+            numeroCorrectoFilas = (filas >= 1 && filas <= 15);
+            if (!numeroCorrectoFilas) {
+                alert("El número de filas debe ser un valor numérico entre 1 y 15.");
+            }
+        } while (!numeroCorrectoFilas);
+
+        do {
+            columnas = parseInt(prompt("Introduce el número de columnas (máximo 15):"));
+            numeroCorrectoColumnas = (columnas >= 1 && columnas <= 15);
+            if (!numeroCorrectoColumnas) {
+                alert("El número de columnas debe ser un valor numérico entre 1 y 15.");
+            }
+        } while (!numeroCorrectoColumnas);
+
+        //llamo a la función inicializa_tablero
+        inicializa_tablero(filas, columnas);
+
+        /*
+          Se va a pedir al usuario el número de palabras a introducir 
+          en el tablero. Hay que controlar lo mismo de antes además de 
+          un máximo de 3 palabras. 
+        */
+
+        //Pedimos ahora el número de palabras que tendrá
+        var numPalabras;
+        do {
+            numPalabras = parseInt(prompt("Introduce el número de palabras (máximo 3):"));
+            numeroCorrectoPalabras = (numPalabras >= 1 && numPalabras <= 3);
+            if (!numeroCorrectoPalabras) {
+                alert("El número de palabras debe ser un valor numérico entre 1 y 3.");
+            }
+        } while (!numeroCorrectoPalabras);
+
+        //Operador de asignacion ++;
+        var i = 0;
+
+        /*
+         Voy a ir pidiendo cada una de las palabras al usuario.
+         Introduzca la palabra número...
+         Introduzca la fila donde comenzaría
+         Introduzca la columna donde comenzaría
+         Introduzca la dirección de la palabra (arriba(ar), izquierda(iz), abajo(ab), derecha(de))
+         TENGO QUE CONTROLAR QUE TODO LO ANTERIOR SE INTRODUCEN LOS VALORES CORRECTOS
+       
+         Una vez que toda esa información es correcta, llamo a la función
+         esta_en_rango
+
+         Si la palabra esta_en_rango entonces llamo a la función comprueba_ocupacion
+         y en caso que haya hueco la palabra quedará insertada y se continuará del mismo
+         modo con la siguiente palabra.
+
+         En caso de que no quepa en el tablero o las posiciones ya estén ocupadas
+         se devolverán los mensajes correspondientes y se pasará a la siguiente
+         palabra (más adelante se hará alguna modificación respecto a esto)
+         */
+
+        while (i < numPalabras) {
+            var palabra = prompt("Introduce la palabra número " + (i + 1) + ":");
+            var fila, columna, direccion;
+
+            //Expresión regular abecedario, solo se permite de la A-Z y de la a-z.
+            var abecedario = /^[A-Za-z]+$/;
+
+            //Mientras contenga caracter que no esté en la expresión regular (abecedario) el bucle se repite
+            while (!palabra.match(abecedario)) {
+                palabra = prompt("Introduce una palabra válida (solo letras):");
+            }
+
+            fila = parseInt(prompt("Introduce la fila donde comenzaría la palabra " + palabra + ":"));
+            columna = parseInt(prompt("Introduce la columna donde comenzaría la palabra " + palabra + ":"));
+            direccion = prompt("Introduce la dirección de la palabra " + palabra + " (arriba(ar), izquierda(iz), abajo(ab), derecha(de)):").toLowerCase();
+
+            //Operadores lógicos OR(||)
+            var posicionCorrecta = (fila >= 0 && fila < filas) && (columna >= 0 && columna < columnas);
+
+            //Comparación menor que <
+            var longitudPalabra = palabra.length;
+            var cabeEnTablero = false;
+
+            if (direccion === "de") {
+                cabeEnTablero = (columna + longitudPalabra <= columnas);
+            } else if (direccion === "ab") {
+                cabeEnTablero = (fila + longitudPalabra <= filas);
+            }
+
+            //uso de igualdad estricta === (compara valor y tipo)
+            var estaEnRango = posicionCorrecta && cabeEnTablero;
+
+            //igualdad abstracta == (compara solo el valor.)
+            if (estaEnRango) {
+                if (comprueba_ocupacion(palabra, fila, columna, direccion)) {
+                    rellena_tablero(palabra, fila, columna, direccion);
+                    i++;
+                } else {
+                    alert("La palabra " + palabra + " no cabe en el tablero o las posiciones ya están ocupadas.");
+                }
+            } else {
+                alert("La palabra " + palabra + " no está en rango.");
+            }
+        }
+
+        //llamar a las funciones rellena_tablero e imprime_tablero
+        rellena_tablero();
+        imprime_tablero();
+
+        /*
+          Crea un tablero con las filas y columnas que ha indicado
+          el usuario y cada posición tiene el carácter "?"
+        */
+        function inicializa_tablero(filas, columnas) {
+            tablero = new Array(filas);
+            for (var i = 0; i < filas; i++) {
+                tablero[i] = new Array(columnas);
+                for (var j = 0; j < columnas; j++) {
+                    tablero[i][j] = "?";
+                }
+            }
+        }
+
+        /*
+          Esta función imprime el tablero de la sopa de letras 
+          con todas las palabras insertadas y el resto con caracteres
+          aleatorios.
+        */
+        function imprime_tablero() {
+            for (var i = 0; i < filas; i++) {
+                for (var j = 0; j < columnas; j++) {
+                    document.write(tablero[i][j] + " ");
+                }
+                document.write("<br>");
+            }
+        }
+
+        /*
+          Esta función recibe una palabra, la fila y columna donde iría la primera letra
+         de esa palabra, así como la dirección en la que se insertaría.
+         Trata de comprobar si dicha palabra cabe en el tablero. En caso de caber
+         devuelve true, sino devuelve false. 
+        */
+        function esta_en_rango(palabra, fila, columna, direccion) {
+            var longitudPalabra = palabra.length;
+            var cabeEnTablero = false;
+
+            if (direccion === "de") {
+                cabeEnTablero = (columna + longitudPalabra <= columnas);
+            } else if (direccion === "ab") {
+                cabeEnTablero = (fila + longitudPalabra <= filas);
+            }
+
+            return cabeEnTablero;
+        }
+
+        /*
+         Esta función recibe una palabra, la fila y columna donde iría la primera letra
+         de esa palabra, así como la dirección en la que se insertaría.
+         Trata de comprobar si las posiciones que va a ocupar la nueva
+         palabra están o no libres. En caso de estar libres todas devuelve true. En
+         el caso de que solo una esté ocupada devuelve false
+        */
+        function comprueba_ocupacion(palabra, fila, columna, direccion) {
+            var longitudPalabra = palabra.length;
+
+            for (var i = 0; i < longitudPalabra; i++) {
+                var posicionFila = fila;
+                var posicionColumna = columna;
+
+                if (direccion === "de") {
+                    posicionColumna += i;
+                } else if (direccion === "ab") {
+                    posicionFila += i;
+                }
+
+                // Comprobar si la posición está ocupada
+                if (tablero[posicionFila][posicionColumna] !== "?") {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        /*
+         Esta función va a recorrer todo el tablero de la 
+         sopa de letras de modo que donde encuentre el caracter "?"
+         lo va a sustituir por una letra aleatoria, y donde haya otro
+         carácter lo va a dejar sin modificar
+        */
+        function rellena_tablero() {
+            var letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            var letrasLength = letras.length;
+
+            for (var i = 0; i < filas; i++) {
+                for (var j = 0; j < columnas; j++) {
+                    if (tablero[i][j] === "?") {
+                        var randomIndex = Math.floor(Math.random() * letrasLength);
+                        tablero[i][j] = letras.charAt(randomIndex);
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>
