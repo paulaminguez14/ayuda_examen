@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestor de Notas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        #notesContainer {
+            margin-top: 20px;
+        }
+        .note {
+            background-color: #f0f0f0;
+            padding: 15px;
+            margin: 10px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .note:hover {
+            background-color: #e0e0e0;
+        }
+        .delete-btn, .edit-btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-left: 10px;
+        }
+        .delete-btn:hover, .edit-btn:hover {
+            background-color: darkblue;
+        }
+        input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+            width: 250px;
+        }
+        #modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+        }
+        #modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            width: 300px;
+        }
+        #modal-content input {
+            width: 100%;
+        }
+        #modal-content button {
+            margin-top: 10px;
+            padding: 8px 20px;
+            background-color: green;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        #modal-content button.cancel {
+            background-color: red;
+        }
+        .error-message {
+            color: red;
+            font-size: 12px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>📝 Gestor de Notas</h2>
+    <input type="text" id="noteInput" placeholder="Escribe el nombre de la nota y presiona Enter">
+    <div id="error-message" class="error-message"></div> <!-- Mensaje de error al crear -->
+    
+    <div id="notesContainer"></div>
+
+    <!-- Modal para editar la nota -->
+    <div id="modal">
+        <div id="modal-content">
+            <h3>Editar Nota</h3>
+            <input type="text" id="editInput" placeholder="Edita tu nota">
+            <input type="date" id="editDate" placeholder="Fecha de vencimiento">
+            <button id="saveBtn">Aceptar</button>
+            <button id="cancelBtn" class="cancel">Cancelar</button>
+            <div id="modal-error-message" class="error-message"></div> <!-- Mensaje de error en edición -->
+        </div>
+    </div>
+
+    <script>
+        /* 
+        INSTRUCCIONES
+        Objetivo:
+Construir una aplicación que permita gestionar notas, creando, editando y eliminando notas. Cada nota tendrá un nombre, un campo de fecha asociado y una validación para asegurarse de que los datos ingresados sean correctos. Además, se trabajará con el DOM y la manipulación de eventos de ratón y teclado.
+
+Requisitos:
+Interfaz de Usuario:
+
+Un campo de entrada donde el usuario pueda escribir el nombre de la nota.
+Un área que muestre las notas creadas en forma de tarjeta, con un botón para eliminar
+ y un botón para editar.
+Un modal que se abra al hacer clic en el botón editar, donde el usuario pueda modificar 
+el nombre de la nota y la fecha de vencimiento.
+
+Validaciones:
+Nombre de la nota: El nombre debe cumplir con los siguientes requisitos:
+No puede estar vacío.
+Debe tener entre 4 y 10 caracteres.
+Debe seguir un formato específico con una letra mayúscula al principio, seguido de
+ letras y finalizando con tres dígitos (por ejemplo, "NotaABC123").
+Fecha de vencimiento: La fecha seleccionada debe ser posterior o igual a la fecha actual.
+
+Funcionalidades:
+Crear una nueva nota: El usuario debe poder ingresar el nombre de una nueva nota y 
+automáticamente se le asignará una fecha de vencimiento (una semana después de la fecha
+ actual).
+Editar una nota: El usuario podrá cambiar tanto el nombre de la nota como la fecha de 
+vencimiento.
+Eliminar una nota: El usuario podrá eliminar cualquier nota.
+
+Instrucciones:
+Completa el código proporcionando las funciones necesarias para validar los datos y 
+manejar los eventos de clic en los botones de editar, eliminar y guardar cambios.
+Se debe asegurar que la aplicación maneje correctamente las validaciones y los errores.
+        */
+        const noteInput = document.getElementById('noteInput');
+        const notesContainer = document.getElementById('notesContainer');
+        const modal = document.getElementById('modal');
+        const editInput = document.getElementById('editInput');
+        const editDate = document.getElementById('editDate');
+        const saveBtn = document.getElementById('saveBtn');
+        const cancelBtn = document.getElementById('cancelBtn');
+        const errorMessage = document.getElementById('error-message');
+        const modalErrorMessage = document.getElementById('modal-error-message');
+        let notes = [];
+        let noteToEdit = null;
+
+        /* Crear la expresión regular para validar el texto de la nota de modo que
+        empiece por una letra mayúscula
+        seguida de dos a siete letras (ya sean minúsculas o mayúsculas)
+        termine exactamente por tres números
+        
+        const regex= 
+        */
+        const regex = /^[A-Z][a-zA-Z]{2,7}\d{3}$/;
+
+
+        /*Función para generar la fecha de vencimiento 
+        (devuelve una fecha justo una semana después de la fecha actual)*/ 
+        function obtenerFechaVencimiento() {
+            let fecha = new Date();
+            fecha.setDate(fecha.getDate() + 7);
+            return fecha.toISOString().split('T')[0];
+        }
+
+        // Función para obtener la fecha actual en formato YYYY-MM-DD
+        function obtenerFechaActual() {
+            return new Date().toISOString().split('T')[0];
+        }
+
+        /* Función para crear una nueva nota a la que se le pasa como
+        parámetro su nombre
+        */
+        function crearNota(texto) {
+            const fechaVencimiento = obtenerFechaVencimiento(); // Fecha de vencimiento por defecto
+            
+            /*Usando el DOM crear una nota. La nota va a ser un contenedor div que
+            vamos a crear almacenando en noteElement y le vamos a añadir la clase "note"
+             const noteElement
+            */
+            const noteElement = document.createElement('div');
+            noteElement.classList.add('note');
+            
+            /*Usando el DOM vamos a crear el contenido de la nota, creando un elemento
+            de tipo span y añadiendo el nombre de la nota junto con la fecha de vencimiento
+            const noteText
+            */
+            const noteText = document.createElement('span');
+            noteText.textContent = `${texto} (Vence: ${fechaVencimiento})`;
+
+            
+
+            /*Usando el DOM crear un elemento de tipo botón, con nombre Eliminar
+            y añadirlo a la clase 'delete-btn. Dicho botón está asociado a la nota. 
+            const deleteBtn
+            */ 
+            const deleteBtn = document.createElement('button');
+            deleteBtn.textContent = 'Eliminar';
+            deleteBtn.classList.add('delete-btn');
+
+            /* Igual que el anterior pero creando un botón de editar, con nombre Editar
+            y añadirlo a la clase 'edit-btn. Dicho botón está asociado a la nota.
+            const editBtn
+            */
+            const editBtn = document.createElement('button');
+            editBtn.textContent = 'Editar';
+            editBtn.classList.add('edit-btn');
+        
+
+            /* Asociar evento de eliminación (de click de ratón) al botón creado 
+             anteriormente. Al hacer click sobre dicho botón, la nota se eliminará
+             También se eliminará de la lista interna de notas.
+            */
+            deleteBtn.onclick = () => {
+                notesContainer.removeChild(noteElement);
+                notes = notes.filter(note => note.texto !== texto);
+            };
+
+
+            /*Asociar evento de edición de modo que al hacer click sobre editar
+            se va abrir una ventana modal con los valores de nombre de la nota
+            y fecha de vencimiento ya cargados 
+            
+
+            modal.style.display = 'flex'; // Mostrar modal
+            */ 
+            editBtn.onclick = () => {
+                noteToEdit = noteElement;
+                editInput.value = texto;
+                editDate.value = fechaVencimiento;
+                modal.style.display = 'flex';
+            };
+           
+
+            // Agregar la nota al contenedor notesContainer y a la lista interna
+            noteElement.append(noteText, editBtn, deleteBtn);
+            notesContainer.appendChild(noteElement);
+            notes.push({ texto, fechaVencimiento });
+        }
+
+        // Completar la siguiente función para validar el nombre de la nota
+        function validarNombreNota(nombre) {
+           
+                //errorMessage.textContent = 'El campo no puede estar vacío.';
+                if (!nombre) {
+                errorMessage.textContent = 'El campo no puede estar vacío.';
+                return false;
+                 }
+                //errorMessage.textContent = 'La nota debe tener entre 4 y 10 caracteres.';
+                if (nombre.length < 4 || nombre.length > 10) {
+                errorMessage.textContent = 'La nota debe tener entre 4 y 10 caracteres.';
+                return false;
+                 }
+                //errorMessage.textContent = 'El formato de la nota es inválido. Debe comenzar con una mayúscula, seguido de letras y terminar con 3 dígitos.';
+                if (!regex.test(nombre)) {
+                errorMessage.textContent = 'El formato de la nota es inválido.';
+                return false;
+                }
+                //errorMessage.textContent = ''; // Limpiar mensaje de error
+                errorMessage.textContent = '';
+                return true;
+        }
+
+        // Función para validar la fecha
+        function validarFecha(fecha) {
+            return fecha >= obtenerFechaActual();
+        }
+
+        /* Evento de teclado para agregar una nueva nota
+           Cuando se pulse la tecla enter y el campo no esté vacío
+           se comprobará la validación del nombre de la nota llamando a
+           validarNombreNota
+           En caso de que sea válido se llamará a la función crearnota
+           pasándole el nombre de la nota escrito por el usuario
+           Hay que limpiar también el input
+        */
+        noteInput.addEventListener('keypress', (event) => {
+            if (event.key === 'Enter') {
+                const texto = noteInput.value.trim();
+                if (validarNombreNota(texto)) {
+                    crearNota(texto);
+                    noteInput.value = '';
+                }
+            }
+        });
+
+        // Evento de guardar el cambio de la nota
+        saveBtn.addEventListener('click', () => {
+            const newText = editInput.value.trim();
+            const newDate = editDate.value;
+
+            // Validación
+            if (!validarNombreNota(newText)) {
+                return;
+            } else if (!validarFecha(newDate)) {
+                return;
+            } else {
+                // Si la validación es exitosa, actualizar el texto de la nota
+                if (noteToEdit) {
+                    const noteText = noteToEdit.querySelector('span');
+                    noteText.textContent = `${newText} (Vence: ${newDate})`; // Actualizar la nota con la nueva fecha
+                }
+                modal.style.display = 'none'; // Cerrar modal
+                noteToEdit = null; // Resetear la nota que estamos editando
+            }
+        });
+
+         /* Evento de cancelar la edición
+          asociar al boton cancelBtn el evento de click de ratón
+          de modo que desaparezca la ventana modal
+          noteToEdit sea null
+          y limpiar mensaje de error de la modal
+        */
+
+        cancelBtn.addEventListener('click', () => {
+            modal.style.display = 'none'; // Ocultar modal
+            noteToEdit = null; // Resetear la nota en edición
+            modalErrorMessage.textContent = ''; // Limpiar mensaje de error
+        });
+        
+
+        // Evento para cerrar el modal si se hace clic fuera de él
+        modal.addEventListener('click', (event) => {
+            if (event.target === modal) {
+                modal.style.display = 'none'; // Cerrar modal si se hace clic fuera
+                noteToEdit = null; // Resetear la nota que estamos editando
+                modalErrorMessage.textContent = ''; // Limpiar mensaje de error
+            }
+        });
+    </script>
+
+</body>
+</html>
