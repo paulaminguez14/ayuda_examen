@@ -25,13 +25,7 @@ h1 {
 
 /* Estilo del cuerpo con fondo de gradiente */
 body {
-    background: linear-gradient(to bottom, 
-    red 0%, red 25%, 
-    yellow 25%, yellow 75%, 
-    red 75%, red 100%);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed; 
+    background-color: cian;
     
     /* Flexbox para centrar elementos */
     display: flex;
