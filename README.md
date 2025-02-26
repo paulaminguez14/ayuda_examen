@@ -14,3 +14,5 @@ JUANK escucha al darle a editar el nombre que se ve es el que tenia antes de edi
 # EJERCICIO 1 SUBIDO
 TU EJERCICIO LE FALTA VALIDAD QUE NOMBRE NO ESTÉ VACIO
 EL ELIMINAR NOSOTROS HEMOS ENTENDIDO QUE LO DEBE ELIMINAR DEL TODO, NO BAJAR LA CANTIDAD
+
+no se si ahora esta mejor, puedes mirarlo a ver si me falta algo?
